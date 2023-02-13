@@ -19,14 +19,12 @@ call plug#begin()
 
   " Markdown editing
   Plug 'godlygeek/tabular'
-  Plug 'preservim/vim-markdown'
-
-  " File explorer and dependencies
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Required for vim 8
-  Plug 'roxma/vim-hug-neovim-rpc'
-  " Install this plugin
-  Plug 'roxma/nvim-yarp', { 'do': 'pip install -r requirements.txt' }
+  Plug 'SidOfc/mkdx'
+  " Uncomment if instant rendering is needed
+  " Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+  
+  " File explorer
+  Plug 'preservim/nerdtree' 
 
   " React development
   Plug 'pangloss/vim-javascript'
@@ -62,6 +60,9 @@ set nobackup
 set nowritebackup
 " Do not wrap lines when overflowing the screen width
 set nowrap
+autocmd FileType markdown set wrap
+autocmd FileType markdown set linebreak
+
 " Converts tabs to spaces
 set expandtab
 " Disable mouse support
