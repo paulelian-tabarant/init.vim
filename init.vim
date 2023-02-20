@@ -35,6 +35,12 @@ call plug#begin()
   Plug 'jparise/vim-graphql'
   " Autocompletion for JS/TS
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Rainbow parentheses
+  Plug 'frazrepo/vim-rainbow'
+  " Indent guides
+  Plug 'nathanaelkane/vim-indent-guides'
+  " Brackets auto-closing
+  Plug 'raimondi/delimitmate'
 
 call plug#end()
 
@@ -44,7 +50,7 @@ let mapleader = ","
 set encoding=utf-8
 
 " Theme definition
-colorscheme gruvbox 
+colorscheme kanagawa
 set background=dark
 set termguicolors
 
@@ -95,8 +101,7 @@ let g:vim_markdown_edit_url_in = 'tab'
 let g:vim_markdown_follow_anchor = 1
 
 " Development
-"let g:coc_node_args = ['--max-old-space-size=4096', '--inspect=127.0.0.1:5009']
-
+"
 " File explorer
 if empty(argv())
     au VimEnter * NERDTree
@@ -104,6 +109,14 @@ endif
 autocmd FileType javascript typescript json html css let g:nerdtree_tabs_open_on_console_startup=1
 " Enable line numbering for Web development
 autocmd BufEnter *.{js,jsx,ts,tsx,json,html,css} set number
+
+" Indent guides on startup
+" let g:indent_guides_enable_on_vim_startup = 1
+
+" Rainbow parentheses on startup
+au FileType javascript,typescript,javascriptreact,typescriptreact,json,html,css call rainbow#load()
+
+au FileType javascript,typescript,javascriptreact,typescriptreact set colorcolumn=80
 
 " React syntax highlighting for large files
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
