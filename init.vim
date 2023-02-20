@@ -4,6 +4,7 @@ call plug#begin()
 
   " Status bar at bottom of the screen
   Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
   " Unbelievable set of color schemes
   Plug 'flazz/vim-colorschemes'
@@ -41,6 +42,10 @@ call plug#begin()
   Plug 'nathanaelkane/vim-indent-guides'
   " Brackets auto-closing
   Plug 'raimondi/delimitmate'
+  " Git hints
+  Plug 'airblade/vim-gitgutter'
+  " Commenting tools
+  Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
@@ -53,6 +58,8 @@ set encoding=utf-8
 colorscheme kanagawa
 set background=dark
 set termguicolors
+" Airline theme definition
+let g:airline_theme='minimalist'
 
 " Disable compatibility with vi, which can cause unexpected issues.
 set nocompatible
