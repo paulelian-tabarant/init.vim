@@ -97,8 +97,7 @@ let g:vim_markdown_follow_anchor = 1
 " Development
 
 " File explorer
-let g:nerdtree_tabs_open_on_console_startup=1
-
+autocmd FileType javascript typescript json html css let g:nerdtree_tabs_open_on_console_startup=1
 " Enable line numbering for Web development
 autocmd BufEnter *.{js,jsx,ts,tsx,json,html,css} set number
 
