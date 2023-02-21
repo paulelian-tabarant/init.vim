@@ -26,7 +26,7 @@ call plug#begin()
   
   " File explorer
   Plug 'preservim/nerdtree' 
-  Plug 'jistr/vim-nerdtree-tabs'
+  Plug 'jistr/vim-nertree-tabs'
 
   " React development
   Plug 'pangloss/vim-javascript'
@@ -105,7 +105,7 @@ let g:vim_markdown_edit_url_in = 'tab'
 let g:vim_markdown_follow_anchor = 1
 
 " Development
-"
+
 " Custom <leader> key
 let mapleader = ","
 
@@ -119,7 +119,7 @@ autocmd BufEnter *.{js,jsx,ts,tsx,json,html,css} set number
 
 " Rainbow parentheses on startup
 au FileType javascript,typescript,javascriptreact,typescriptreact,json,html,css call rainbow#load()
-
+" Enable vertical line in coding files
 au FileType javascript,typescript,javascriptreact,typescriptreact set colorcolumn=80
 
 " React syntax highlighting for large files
@@ -127,7 +127,19 @@ autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
 " Coc configuration
-"
+
+" coc-git support for vim-airline
+function! s:update_git_status()
+  let g:airline_section_b = "%{get(g:,'coc_git_status','')}"
+endfunction
+
+let g:airline_section_b = "%{get(g:,'coc_git_status','')}"
+
+autocmd User CocGitStatusChange call s:update_git_status()
+
+" Highlight current symbol on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " Link to linters if present in project dependencies
 let g:coc_global_extensions = []
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
@@ -267,7 +279,8 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " Add (Neo)Vim's native statusline support
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
 
 " Mappings for CoCList
 " Show all diagnostics

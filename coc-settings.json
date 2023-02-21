@@ -9,6 +9,11 @@
     "typescriptreact"
   ],
   "tsserver.formatOnType": true,
-  "coc.preferences.formatOnType": true
+  "coc.preferences.formatOnType": true,
+  "markdownlint.config": {
+    "default": true,
+    "line_length": false
+  },
+  "colors.enable": true
 }
 
