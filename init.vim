@@ -49,9 +49,6 @@ call plug#begin()
 
 call plug#end()
 
-" Custom <leader> key
-let mapleader = ","
-
 set encoding=utf-8
 
 " Theme definition
@@ -109,6 +106,9 @@ let g:vim_markdown_follow_anchor = 1
 
 " Development
 "
+" Custom <leader> key
+let mapleader = ","
+
 " File explorer
 if empty(argv())
     au VimEnter * NERDTree
@@ -116,9 +116,6 @@ endif
 autocmd FileType javascript typescript json html css let g:nerdtree_tabs_open_on_console_startup=1
 " Enable line numbering for Web development
 autocmd BufEnter *.{js,jsx,ts,tsx,json,html,css} set number
-
-" Indent guides on startup
-" let g:indent_guides_enable_on_vim_startup = 1
 
 " Rainbow parentheses on startup
 au FileType javascript,typescript,javascriptreact,typescriptreact,json,html,css call rainbow#load()
