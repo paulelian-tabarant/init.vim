@@ -3,7 +3,7 @@
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "prettier.disableSuccessMessage": true,
   "coc.preferences.formatOnSaveFiletypes": [
-  "javascript",
+    "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
