@@ -1,108 +1,109 @@
-call plug#begin()
-  " Set of defaults everyone can agree on
+lua << EOF
+
+local Plug = vim.fn['plug#']
+
+vim.call('plug#begin', '~/.config/nvim/plugged')
+
+  -- Set of defaults everyone can agree on
   Plug 'tpope/vim-sensible'
 
-  " Status bar at bottom of the screen
+  -- Status bar at bottom of the screen
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
-  " Unbelievable set of color schemes
+  -- Unbelievable set of color schemes
   Plug 'flazz/vim-colorschemes'
 
-  " Distraction-free writing
+  -- Distraction-free writing
   Plug 'junegunn/goyo.vim'
-  nnoremap <C-g> :Goyo<CR>
+  -- nnoremap <C-g> :Goyo<CR>
   Plug 'junegunn/limelight.vim'
 
-  " Nightfly color scheme
+  -- Nightfly color scheme
   Plug 'bluz71/vim-nightfly-guicolors'
   Plug 'rebelot/kanagawa.nvim'
 
-  " Markdown editing
+  -- Markdown editing
   Plug 'godlygeek/tabular'
   Plug 'SidOfc/mkdx'
-  " Uncomment if instant rendering is needed
-  " Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+  -- Uncomment if instant rendering is needed
+  -- Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
   
-  " File explorer
+  -- File explorer
   Plug 'preservim/nerdtree' 
   Plug 'jistr/vim-nertree-tabs'
 
-  " React development
+  -- React development
   Plug 'pangloss/vim-javascript'
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+  Plug ('styled-components/vim-styled-components', {branch='main'})
   Plug 'jparise/vim-graphql'
-  " Autocompletion for JS/TS
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Rainbow parentheses
+  -- Autocompletion for JS/TS
+  Plug ('neoclide/coc.nvim', {branch='release'})
+  -- Rainbow parentheses
   Plug 'frazrepo/vim-rainbow'
-  " Indent guides
+  -- Indent guides
   Plug 'nathanaelkane/vim-indent-guides'
-  " Brackets auto-closing
+  -- Brackets auto-closing
   Plug 'raimondi/delimitmate'
-  " Git hints
+  -- Git hints
   Plug 'airblade/vim-gitgutter'
-  " Commenting tools
+  -- Commenting tools
   Plug 'scrooloose/nerdcommenter'
 
-call plug#end()
-
-
-lua << EOF
+vim.call('plug#end')
 
 -- Custom <leader> key
 vim.g.mapleader = ","
 
-vim.g.encoding = "utf-8"
-vim.g.background = "dark"
-vim.g.termguicolors = true
+vim.opt.encoding = "utf-8"
+vim.opt.background = "dark"
+vim.opt.termguicolors = true
 --  Airline theme definition
 vim.g.airline_theme = "minimalist"
 
 --  Disable compatibility with vi, which can cause unexpected issues.
-vim.g.nocompatible = true
+vim.g.compatible = false
 -- Set tab width
-vim.g.tabstop = 2
+vim.opt.tabstop = 2
 -- The same but for indents
-vim.g.shiftwidth = 2
+vim.opt.shiftwidth = 2
 -- Keep cursor in approximately the middle of the screen
-vim.g.scrolloff = 12
+vim.opt.scrolloff = 12
 -- Do not save backup files.
-vim.g.nobackup = true
-vim.g.nowritebackup = true
+vim.opt.backup = false
+vim.opt.writebackup = false
 -- Do not wrap lines when overflowing the screen width
-vim.g.nowrap = true
+vim.opt.wrap = false
 -- Converts tabs to spaces
-vim.g.expandtab = true
+vim.opt.expandtab = true
 --  Disable mouse support
-vim.g.mouse = false
+vim.opt.mouse = ''
 
-EOF
+-- Theme definition
+vim.cmd([[ colorscheme kanagawa ]])
 
-" Theme definition
-colorscheme kanagawa
+--  Enable type file detection. Vim will be able to try to detect the type of file in use.
+vim.cmd([[ filetype on ]])
+-- Enable plugins and load plugin for the detected file type.
+vim.cmd([[ filetype plugin on ]])
+-- Load an indent file for the detected file type.
+vim.cmd([[ filetype indent on ]])
+-- Turn syntax highlighting on.
+vim.cmd([[ syntax on ]])
 
-autocmd FileType markdown set wrap
-autocmd FileType markdown set linebreak
+function execIfMarkdown(command)
+  return vim.api.nvim_exec('autocmd FileType markdown' .. ' lua ' .. command, false)
+end
 
-" Enable type file detection. Vim will be able to try to detect the type of file in use.
-filetype on
-" Enable plugins and load plugin for the detected file type.
-filetype plugin on
-" Load an indent file for the detected file type.
-filetype indent on
-
-" Turn syntax highlighting on.
-syntax on
-
-" Markdown editing configuration
-autocmd FileType markdown set cursorline
-autocmd FileType markdown setlocal spell spelllang=fr
-autocmd FileType markdown Goyo 100
-
-lua << EOF
+-- Markdown editing configuration
+execIfMarkdown('vim.opt.wrap = true')
+execIfMarkdown('vim.opt.linebreak = true')
+execIfMarkdown('vim.opt.cursorline = true')
+execIfMarkdown("vim.api.nvim_command('setlocal spell')")
+execIfMarkdown("vim.api.nvim_buf_set_option(0, 'spelllang', 'fr')")
+execIfMarkdown("vim.cmd([[ Goyo 100 ]])")
 
 -- Configuration for vim-markdown
 vim.g.vim_markdown_conceal = 2
