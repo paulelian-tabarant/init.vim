@@ -78,6 +78,7 @@ vim.g.nowrap = true
 vim.g.expandtab = true
 --  Disable mouse support
 vim.g.mouse = false
+
 EOF
 
 " Theme definition
@@ -100,16 +101,21 @@ syntax on
 autocmd FileType markdown set cursorline
 autocmd FileType markdown setlocal spell spelllang=fr
 autocmd FileType markdown Goyo 100
-" Configuration for vim-markdown
-let g:vim_markdown_conceal = 2
-let g:vim_markdown_conceal_code_blocks = 0
-let g:vim_markdown_math = 1
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_autowrite = 1
-let g:vim_markdown_edit_url_in = 'tab'
-let g:vim_markdown_follow_anchor = 1
+
+lua << EOF
+
+-- Configuration for vim-markdown
+vim.g.vim_markdown_conceal = 2
+vim.g.vim_markdown_conceal_code_blocks = 0
+vim.g.vim_markdown_math = 1
+vim.g.vim_markdown_toml_frontmatter = 1
+vim.g.vim_markdown_frontmatter = 1
+vim.g.vim_markdown_strikethrough = 1
+vim.g.vim_markdown_autowrite = 1
+vim.g.vim_markdown_edit_url_in = 'tab'
+vim.g.vim_markdown_follow_anchor = 1
+
+EOF
 
 " Development
 " File explorer
@@ -136,7 +142,9 @@ function! s:update_git_status()
   let g:airline_section_b = "%{get(g:,'coc_git_status','')}"
 endfunction
 
-let g:airline_section_b = "%{get(g:,'coc_git_status','')}"
+lua << EOF
+vim.g.airline_section_b = "%{get(g:,'coc_git_status','')}"
+EOF
 
 autocmd User CocGitStatusChange call s:update_git_status()
 
@@ -144,17 +152,25 @@ autocmd User CocGitStatusChange call s:update_git_status()
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Link to linters if present in project dependencies
-let g:coc_global_extensions = []
+lua << EOF
+
+vim.g.coc_global_extensions = {}
+
+EOF
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
 endif
 
-" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
-" delays and poor user experience
-set updatetime=300
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved
-set signcolumn=yes
+lua << EOF
+
+-- Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+-- delays and poor user experience
+vim.g.updatetime = 300
+-- Always show the signcolumn, otherwise it would shift the text each time
+-- diagnostics appear/become resolved
+vim.g.signcolumn = "yes"
+
+EOF
 
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -283,7 +299,10 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-set statusline^=%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}
+
+lua << EOF
+vim.g.statusline = "%{get(g:,'coc_git_status','')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}"
+EOF
 
 " Mappings for CoCList
 " Show all diagnostics
