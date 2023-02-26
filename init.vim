@@ -49,35 +49,42 @@ call plug#begin()
 
 call plug#end()
 
-set encoding=utf-8
+
+lua << EOF
+
+-- Custom <leader> key
+vim.g.mapleader = ","
+
+vim.g.encoding = "utf-8"
+vim.g.background = "dark"
+vim.g.termguicolors = true
+--  Airline theme definition
+vim.g.airline_theme = "minimalist"
+
+--  Disable compatibility with vi, which can cause unexpected issues.
+vim.g.nocompatible = true
+-- Set tab width
+vim.g.tabstop = 2
+-- The same but for indents
+vim.g.shiftwidth = 2
+-- Keep cursor in approximately the middle of the screen
+vim.g.scrolloff = 12
+-- Do not save backup files.
+vim.g.nobackup = true
+vim.g.nowritebackup = true
+-- Do not wrap lines when overflowing the screen width
+vim.g.nowrap = true
+-- Converts tabs to spaces
+vim.g.expandtab = true
+--  Disable mouse support
+vim.g.mouse = false
+EOF
 
 " Theme definition
 colorscheme kanagawa
-set background=dark
-set termguicolors
-" Airline theme definition
-let g:airline_theme='minimalist'
 
-" Disable compatibility with vi, which can cause unexpected issues.
-set nocompatible
-" Set tab width
-set tabstop=2
-" The same but for indents
-set shiftwidth=2
-" Keep cursor in approximately the middle of the screen
-set scrolloff=12
-" Do not save backup files.
-set nobackup
-set nowritebackup
-" Do not wrap lines when overflowing the screen width
-set nowrap
 autocmd FileType markdown set wrap
 autocmd FileType markdown set linebreak
-
-" Converts tabs to spaces
-set expandtab
-" Disable mouse support
-set mouse=
 
 " Enable type file detection. Vim will be able to try to detect the type of file in use.
 filetype on
@@ -105,10 +112,6 @@ let g:vim_markdown_edit_url_in = 'tab'
 let g:vim_markdown_follow_anchor = 1
 
 " Development
-
-" Custom <leader> key
-let mapleader = ","
-
 " File explorer
 if empty(argv())
     au VimEnter * NERDTree
