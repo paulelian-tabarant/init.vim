@@ -26,7 +26,9 @@ call plug#begin()
   
   " File explorer
   Plug 'preservim/nerdtree' 
-  Plug 'jistr/vim-nertree-tabs'
+
+  " Universal syntax highlighting
+  Plug 'sheerun/vim-polyglot'
 
   " React development
   Plug 'pangloss/vim-javascript'
@@ -113,7 +115,6 @@ let mapleader = ","
 if empty(argv())
     au VimEnter * NERDTree
 endif
-autocmd FileType javascript typescript json html css let g:nerdtree_tabs_open_on_console_startup=1
 " Enable line numbering for Web development
 autocmd BufEnter *.{js,jsx,ts,tsx,json,html,css} set number
 
