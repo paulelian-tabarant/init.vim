@@ -1,4 +1,4 @@
-source plugins.vim
+source ~/.config/nvim/plugins.vim
 
 " Global variables
 " =
@@ -40,7 +40,7 @@ if empty(argv())
 endif
 
 " Writing
-autocmd FileType markdown runtime writing/*.vim
+autocmd FileType markdown runtime ~/.config/nvim/writing/*.vim
 
 " Development
-runtime development/*.vim
+runtime ~/.config/nvim/development/*.vim
