@@ -16,7 +16,6 @@ call plug#begin()
 
   " Nightfly color scheme
   Plug 'bluz71/vim-nightfly-guicolors'
-  Plug 'rebelot/kanagawa.nvim'
 
   " Markdown editing
   Plug 'godlygeek/tabular'
@@ -26,9 +25,6 @@ call plug#begin()
   
   " File explorer
   Plug 'preservim/nerdtree' 
-
-  " Universal syntax highlighting
-  Plug 'sheerun/vim-polyglot'
 
   " React development
   Plug 'pangloss/vim-javascript'
@@ -54,7 +50,7 @@ call plug#end()
 set encoding=utf-8
 
 " Theme definition
-colorscheme kanagawa
+colorscheme gruvbox
 set background=dark
 set termguicolors
 " Airline theme definition
