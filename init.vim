@@ -25,6 +25,10 @@ call plug#begin()
   
   " File explorer
   Plug 'preservim/nerdtree' 
+  " File finder
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+  " or                                , { 'branch': '0.1.x' }
 
   " React development
   Plug 'pangloss/vim-javascript'
@@ -312,3 +316,9 @@ autocmd CursorHoldI * :call <SID>show_hover_doc()
 autocmd CursorHold * :call <SID>show_hover_doc()
 
 nnoremap <silent><nowait> <space>d  :<C-u>CocDiagnostics<cr>
+
+" Telescope file finder
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
