@@ -6,16 +6,10 @@ call plug#begin()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
-  " Unbelievable set of color schemes
-  Plug 'flazz/vim-colorschemes'
-
   " Distraction-free writing
   Plug 'junegunn/goyo.vim'
   nnoremap <C-g> :Goyo<CR>
   Plug 'junegunn/limelight.vim'
-
-  " Nightfly color scheme
-  Plug 'bluz71/vim-nightfly-guicolors'
 
   " Markdown editing
   Plug 'godlygeek/tabular'
@@ -54,7 +48,7 @@ call plug#end()
 set encoding=utf-8
 
 " Theme definition
-colorscheme gruvbox
+colorscheme habamax
 set background=dark
 set termguicolors
 " Airline theme definition
